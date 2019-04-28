@@ -6,10 +6,10 @@ OBJ=build/main.o
 all: createDir main
 
 main: $(OBJ)
-	$(CC) $(OBJ) -L$$PWD/../OpenGL/lib/ -lglut -lGL -o bin/main
+	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -o bin/main
 
 $(OBJ): $(SOURCE)
-	$(CC) $(CFLAGS) $^ -I$$PWD/../OpenGL/include -o $@
+	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
 
 createDir:
 	mkdir bin build -p
