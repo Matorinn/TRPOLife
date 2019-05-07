@@ -2,17 +2,19 @@ CC=g++
 SOURCE=src/main.cpp
 CFLAGS=-c -Wall
 OBJ=build/main.o
+LIBDIR=bin build
+EXE=bin/main
 
-all: createDir main
+all: $(LIBDIR) $(EXE)
 
-main: $(OBJ)
-	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -o bin/main
+$(EXE): $(OBJ)
+	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -o $(EXE)
 
 $(OBJ): $(SOURCE)
 	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
 
-createDir:
-	mkdir bin build -p
+$(LIBDIR):
+	mkdir $@ -p
 
 launch:
 	./bin/main
