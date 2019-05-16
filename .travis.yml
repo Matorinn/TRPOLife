@@ -5,7 +5,7 @@ compiler: g++
 
 branches:
   only:
-  - master
+  - develop
 
 script:
   - make

@@ -8,7 +8,7 @@ EXE=bin/main
 all: $(LIBDIR) $(EXE)
 
 $(EXE): $(OBJ)
-	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -o $(EXE)
+	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -lGLX -lGLdispatch -o $(EXE)
 
 $(OBJ): $(SOURCE)
 	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
