@@ -2,8 +2,10 @@
 #include "GL/glut.h"
 #include "iostream"
 
-const int X = 120;
-const int Y = 60;
+const int X = 60;
+const int Y = 120;
+
+extern void (*pDisplay)(void);
 
 struct Cell {
     bool life;
@@ -19,12 +21,12 @@ void displayField()
 
     glBegin(GL_POINTS);
 
-    for (int i = 0; i < Y; i++)
-        for (int j = 0; j < X; j++)
+    for (int j = 0; j < Y; j++)
+        for (int i = 0; i < X; i++)
             if (field[i][j].life)
                 glVertex2f(
-                        cellSize / 2 + i * cellSize,
-                        cellSize / 2 + j * cellSize);
+                        cellSize / 2 + j * cellSize,
+                        cellSize / 2 + i * cellSize);
 
     glEnd();
     glutSwapBuffers();
@@ -38,5 +40,5 @@ void gameStart()
             field[i][j].life = rand() % 2;
             field[i][j].succ = 0;
         }
-    displayField();
+    pDisplay = &displayField;
 }

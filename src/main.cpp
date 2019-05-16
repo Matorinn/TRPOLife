@@ -8,6 +8,8 @@ int height = 600;
 // last key pressed
 unsigned char lastKey = 0;
 
+void (*pDisplay)(void);
+
 void draw();
 void timer(int = 0);
 void keyboard(unsigned char key, int x, int y);
@@ -21,7 +23,12 @@ int main(int argc, char* argv[])
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow("Game of life");
 
-    glutDisplayFunc(draw);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, width, height, 0, -1, 1);
+
+    pDisplay = &draw;
+    glutDisplayFunc(pDisplay);
     timer();
 
     glutKeyboardFunc(keyboard);
@@ -41,10 +48,11 @@ void draw()
 
 void timer(int)
 {
-    if (lastKey == 32)
+    if (lastKey == 32) {
         gameStart();
-
-    draw();
+        lastKey = 0;
+    }
+    pDisplay();
     glutTimerFunc(10, timer, 0);
 }
 
