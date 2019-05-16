@@ -1,18 +1,23 @@
 CC=g++
-SOURCE=src/main.cpp
+SOURCE1=src/main.cpp
+SOURCE2=src/game.cpp
 CFLAGS=-c -Wall
-OBJ=build/main.o
+OBJ1=build/main.o
+OBJ2=build/game.o
 LIBDIR=bin build
 EXE=bin/main
 
 all: $(LIBDIR) $(EXE)
 
-$(EXE): $(OBJ)
-	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -o $(EXE)
+$(EXE): $(OBJ1) $(OBJ2)
+	$(CC) $(OBJ1) $(OBJ2) -L OpenGL/lib/ -lglut -lGL -o $(EXE)
 
-$(OBJ): $(SOURCE)
+$(OBJ1): $(SOURCE1)
 	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
 
+$(OBJ2): $(SOURCE2)
+	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
+	
 $(LIBDIR):
 	mkdir $@ -p
 
