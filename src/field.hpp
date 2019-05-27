@@ -10,6 +10,7 @@ public:
     void draw(Painter& p);
 
 private:
+    void genChange();
     struct Cell {
         bool life;
         int succ;
