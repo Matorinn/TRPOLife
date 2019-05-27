@@ -18,5 +18,8 @@ void Field::draw(Painter& p)
     for (int i = 0; i < HEIGHT; i++)
         for (int j = 0; j < WIDTH; j++)
             if (map[i][j].life)
-                p.rect(SIZE / 2 + j * SIZE, SIZE / 2 + i * SIZE);
+                p.rect(j * SIZE + 1,
+                       i * SIZE + 1,
+                       (j + 1) * SIZE - 1,
+                       (i + 1) * SIZE - 1);
 }

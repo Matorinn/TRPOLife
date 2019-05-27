@@ -2,15 +2,12 @@
 #include "field.hpp"
 #include <GL/gl.h>
 
-void Painter::rect(int x, int y)
+void Painter::rect(int x1, int y1, int x2, int y2)
 {
-    glColor3f(1, 1, 1);
-
-    glPointSize(Field::SIZE);
-
-    glBegin(GL_POINTS);
-
-    glVertex2f(x, y);
-
+    glBegin(GL_QUADS);
+    glVertex2f(x1, y1);
+    glVertex2f(x2, y1);
+    glVertex2f(x2, y2);
+    glVertex2f(x1, y2);
     glEnd();
 }
