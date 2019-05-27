@@ -1,6 +1,13 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#pragma once
+#include "field.hpp"
 
-void gameStart();
+class Painter;
 
-#endif /* GAME_HPP */
+class Game {
+public:
+    Game();
+    void drawRand(Painter& p);
+
+private:
+    Field field_;
+};

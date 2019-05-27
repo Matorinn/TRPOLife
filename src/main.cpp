@@ -1,65 +1,62 @@
 #include "game.hpp"
+#include "painter.hpp"
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <iostream>
 
-int width = 1200;
-int height = 600;
-// last key pressed
 unsigned char lastKey = 0;
 
-void (*pDisplay)(void);
-
-void draw();
+void display();
 void timer(int = 0);
 void keyboard(unsigned char key, int x, int y);
+
+Game game;
 
 int main(int argc, char* argv[])
 {
     glutInit(&argc, argv);
-    glutInitWindowSize(width, height);
-    glutInitWindowPosition(100, 50);
+    glutInitWindowSize(Field::WIDTH * Field::SIZE, Field::HEIGHT * Field::SIZE);
+    glutInitWindowPosition(100, 780);
 
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow("Game of life");
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, width, height, 0, -1, 1);
+    glOrtho(0,
+            Field::WIDTH * Field::SIZE,
+            Field::HEIGHT * Field::SIZE,
+            0,
+            -1,
+            1);
 
-    pDisplay = &draw;
-    glutDisplayFunc(pDisplay);
-    timer();
+    glutDisplayFunc(display);
+    timer(0);
 
     glutKeyboardFunc(keyboard);
-    glClearColor(0, 0, 0, 1.0);
+    glClearColor(0, 0, 0, 0);
     glutMainLoop();
 
     return 0;
 }
 
-void draw()
+void keyboard(unsigned char key, int x, int y)
+{
+    if (key == 27)
+        exit(0);
+    lastKey = key;
+}
+
+void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor3ub(255, 255, 255);
-
+    Painter p;
+    game.drawRand(p);
     glutSwapBuffers();
 }
 
 void timer(int)
 {
-    if (lastKey == 32) {
-        gameStart();
-        lastKey = 0;
-    }
-    pDisplay();
+    display();
     glutTimerFunc(10, timer, 0);
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-    // app closes when Esc pressed
-    if (key == 27)
-        exit(0);
-    lastKey = key;
 }
