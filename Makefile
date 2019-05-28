@@ -1,16 +1,31 @@
 CC=g++
-SOURCE=src/main.cpp
+SOURCE1=src/main.cpp
+SOURCE2=src/game.cpp
+SOURCE3=src/painter.cpp
+SOURCE4=src/field.cpp
 CFLAGS=-c -Wall
-OBJ=build/main.o
+OBJ1=build/main.o
+OBJ2=build/game.o
+OBJ3=build/painter.o
+OBJ4=build/field.o
 LIBDIR=bin build
 EXE=bin/main
 
 all: $(LIBDIR) $(EXE)
 
-$(EXE): $(OBJ)
-	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -lGLX -lGLdispatch -o $(EXE)
+$(EXE): $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
+	$(CC) $^ -L OpenGL/lib/ -lglut -lGL -o $(EXE)
 
-$(OBJ): $(SOURCE)
+$(OBJ1): $(SOURCE1)
+	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
+
+$(OBJ2): $(SOURCE2)
+	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
+
+$(OBJ3): $(SOURCE3)
+	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
+
+$(OBJ4): $(SOURCE4)
 	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
 
 $(LIBDIR):
