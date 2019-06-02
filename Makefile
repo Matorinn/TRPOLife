@@ -14,7 +14,7 @@ EXE=bin/main
 all: $(LIBDIR) $(EXE)
 
 $(EXE): $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
-	$(CC) $^ -L OpenGL/lib/ -lglut -lGL -o $(EXE)
+	$(CC) $^ -L OpenGL/lib -lglut -lGL -o $(EXE)
 
 $(OBJ1): $(SOURCE1)
 	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
