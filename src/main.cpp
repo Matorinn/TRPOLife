@@ -1,7 +1,5 @@
 #include "game.hpp"
-#include "painter.hpp"
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {

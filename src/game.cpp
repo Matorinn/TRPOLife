@@ -1,20 +1,16 @@
 #include "game.hpp"
-#include "painter.hpp"
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include "field.hpp"
 #include <cstdlib>
 
 Field field_;
-bool isPlay = true;
 int Game::speed;
-
-unsigned char lastKey = 0;
+char lastKey = 0;
 
 Game::Game()
 {
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void Game::keyboard(unsigned char key, int x, int y)
 {
     if (key == 27)
         exit(0);
@@ -31,6 +27,7 @@ void Game::display()
 
 void Game::timer(int)
 {
+    bool isPlay = true;
     if (lastKey == '1')
         isPlay = true;
     if (lastKey == '2')

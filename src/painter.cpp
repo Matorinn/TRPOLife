@@ -1,5 +1,4 @@
 #include "painter.hpp"
-#include "field.hpp"
 #include <GL/gl.h>
 
 std::string Painter::active;

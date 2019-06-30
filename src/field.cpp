@@ -1,6 +1,4 @@
 #include "field.hpp"
-#include "GL/glut.h"
-#include "painter.hpp"
 #include <cstdlib>
 #include <ctime>
 
