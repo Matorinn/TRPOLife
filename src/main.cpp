@@ -55,9 +55,47 @@ void pressrules(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
     }
 }
 
-int main(int argc, char* argv[])
+void postmenu(
+        sf::RenderWindow& window,
+        sf::Event& event,
+        sf::Sprite& backb,
+        sf::Sprite& playb,
+        int argc,
+        char** argv)
 {
     Game game;
+    sf::Texture pmbg;
+    sf::Sprite postmenu_bckg;
+    pmbg.loadFromFile("textures/postmenu.png");
+    postmenu_bckg.setTexture(pmbg);
+    backb.setPosition(940, 540);
+    playb.setPosition(300, 425);
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            if (event.type == sf::Event::MouseButtonReleased
+                && event.mouseButton.button == sf::Mouse::Left) {
+                if (sf::IntRect(backb.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window)))
+                    return;
+                if (sf::IntRect(playb.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window)))
+                    game.gamedraw(argc, argv);
+            }
+        }
+
+        window.clear(sf::Color(82, 82, 82, 255));
+        window.draw(postmenu_bckg);
+        window.draw(backb);
+        window.draw(playb);
+        window.display();
+    }
+}
+
+int main(int argc, char* argv[])
+{
     sf::RenderWindow window(sf::VideoMode(1000, 600), "MainMenu");
     sf::Texture pb, rb, ob, xb, bb, ttle;
     ttle.loadFromFile("textures/title.png");
@@ -84,7 +122,7 @@ int main(int argc, char* argv[])
                 && event.mouseButton.button == sf::Mouse::Left) {
                 if (sf::IntRect(playb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    game.gamedraw(argc, argv);
+                    postmenu(window, event, backb, playb, argc, argv);
                 }
                 if (sf::IntRect(rulesb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
