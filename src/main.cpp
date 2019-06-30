@@ -5,11 +5,20 @@
 
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
-    sf::Texture obg, clb, okt;
-    sf::Sprite options_bckg, colorb[10], oksprite;
+    sf::Texture obg, clb, okt, mint, midt, maxt;
+    sf::Sprite options_bckg, colorb[10], oksprite, mins, mids, maxs;
     obg.loadFromFile("textures/options_bckg.png");
     okt.loadFromFile("textures/ok.png");
+    mint.loadFromFile("textures/min.png");
+    midt.loadFromFile("textures/mid.png");
+    maxt.loadFromFile("textures/max.png");
     options_bckg.setTexture(obg);
+    mins.setTexture(mint);
+    mids.setTexture(midt);
+    maxs.setTexture(maxt);
+    mins.setPosition(690, 210);
+    mids.setPosition(760, 210);
+    maxs.setPosition(830, 210);
     clb.loadFromFile("textures/color.png");
     backb.setPosition(940, 540);
     for (int i = 0; i < 8; i++) {
@@ -83,6 +92,9 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
         window.clear(sf::Color(82, 82, 82, 255));
         for (int i = 0; i < 8; i++)
             window.draw(colorb[i]);
+        window.draw(mins);
+        window.draw(mids);
+        window.draw(maxs);
         window.draw(oksprite);
         window.draw(options_bckg);
         window.draw(backb);
