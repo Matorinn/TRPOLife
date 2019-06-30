@@ -3,6 +3,32 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
+{
+    sf::Texture obg;
+    sf::Sprite options_bckg;
+    obg.loadFromFile("textures/options_bckg.png");
+    options_bckg.setTexture(obg);
+    backb.setPosition(940, 540);
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            if (event.type == sf::Event::MouseButtonReleased
+                && event.mouseButton.button == sf::Mouse::Left)
+                if (sf::IntRect(backb.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window)))
+                    return;
+        }
+
+        window.clear(sf::Color(82, 82, 82, 255));
+        window.draw(options_bckg);
+        window.draw(backb);
+        window.display();
+    }
+}
+
 void pressrules(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
     sf::Texture rbg;
@@ -66,6 +92,7 @@ int main(int argc, char* argv[])
                 }
                 if (sf::IntRect(optionsb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
+                    pressoptions(window, event, backb);
                 }
                 if (sf::IntRect(exitb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
