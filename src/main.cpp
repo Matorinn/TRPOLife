@@ -5,9 +5,10 @@
 
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
-    sf::Texture obg, clb;
-    sf::Sprite options_bckg, colorb[10];
+    sf::Texture obg, clb, okt;
+    sf::Sprite options_bckg, colorb[10], oksprite;
     obg.loadFromFile("textures/options_bckg.png");
+    okt.loadFromFile("textures/ok.png");
     options_bckg.setTexture(obg);
     clb.loadFromFile("textures/color.png");
     backb.setPosition(940, 540);
@@ -36,12 +37,53 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
                 if (sf::IntRect(backb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window)))
                     return;
+                if (sf::IntRect(colorb[0].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(630, 310);
+                }
+                if (sf::IntRect(colorb[1].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(690, 310);
+                }
+                if (sf::IntRect(colorb[2].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(750, 310);
+                }
+                if (sf::IntRect(colorb[3].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(810, 310);
+                }
+                if (sf::IntRect(colorb[4].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(630, 370);
+                }
+                if (sf::IntRect(colorb[5].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(690, 370);
+                }
+                if (sf::IntRect(colorb[6].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(750, 370);
+                }
+                if (sf::IntRect(colorb[7].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite.setTexture(okt);
+                    oksprite.setPosition(810, 370);
+                }
             }
         }
 
         window.clear(sf::Color(82, 82, 82, 255));
         for (int i = 0; i < 8; i++)
             window.draw(colorb[i]);
+        window.draw(oksprite);
         window.draw(options_bckg);
         window.draw(backb);
         window.display();
