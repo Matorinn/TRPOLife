@@ -1,28 +1,124 @@
 #include "game.hpp"
-#include "painter.hpp"
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
-    sf::Texture obg;
-    sf::Sprite options_bckg;
+    sf::Texture obg, clb, okt, mint, midt, maxt;
+    sf::Sprite options_bckg, colorb[7], oksprite[2], mins, mids, maxs;
     obg.loadFromFile("textures/options_bckg.png");
+    okt.loadFromFile("textures/ok.png");
+    mint.loadFromFile("textures/min.png");
+    midt.loadFromFile("textures/mid.png");
+    maxt.loadFromFile("textures/max.png");
     options_bckg.setTexture(obg);
+    mins.setTexture(mint);
+    mids.setTexture(midt);
+    maxs.setTexture(maxt);
+    mins.setPosition(690, 210);
+    mids.setPosition(760, 210);
+    maxs.setPosition(830, 210);
+    clb.loadFromFile("textures/color.png");
     backb.setPosition(940, 540);
+    for (int i = 0; i < 7; i++) {
+        colorb[i].setTexture(clb);
+    }
+    colorb[0].setColor(sf::Color(255, 0, 0));
+    colorb[1].setColor(sf::Color(255, 255, 255));
+    colorb[2].setColor(sf::Color(255, 0, 255));
+    colorb[3].setColor(sf::Color(0, 0, 127));
+    colorb[4].setColor(sf::Color(0, 255, 0));
+    colorb[5].setColor(sf::Color(127, 127, 0));
+    colorb[6].setColor(sf::Color(0, 255, 255));
+    for (int i = 0; i < 4; i++) {
+        colorb[i].setPosition(630 + i * 60, 310);
+    }
+    for (int i = 0; i < 3; i++) {
+        colorb[i + 4].setPosition(630 + i * 60, 370);
+    }
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
 
             if (event.type == sf::Event::MouseButtonReleased
-                && event.mouseButton.button == sf::Mouse::Left)
+                && event.mouseButton.button == sf::Mouse::Left) {
                 if (sf::IntRect(backb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window)))
                     return;
+                if (sf::IntRect(colorb[0].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(630, 310);
+                    Painter::active = "red";
+                }
+                if (sf::IntRect(colorb[1].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(690, 310);
+                    Painter::active = "white";
+                }
+                if (sf::IntRect(colorb[2].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(750, 310);
+                    Painter::active = "magenta";
+                }
+                if (sf::IntRect(colorb[3].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(810, 310);
+                    Painter::active = "dark_blue";
+                }
+                if (sf::IntRect(colorb[4].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(630, 370);
+                    Painter::active = "green";
+                }
+                if (sf::IntRect(colorb[5].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(690, 370);
+                    Painter::active = "brown";
+                }
+                if (sf::IntRect(colorb[6].getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(750, 370);
+                    Painter::active = "cyan";
+                }
+
+                if (sf::IntRect(mins.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[1].setTexture(okt);
+                    oksprite[1].setPosition(690, 210);
+                    Game::speed = 100;
+                }
+
+                if (sf::IntRect(mids.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[1].setTexture(okt);
+                    oksprite[1].setPosition(760, 210);
+                    Game::speed = 10;
+                }
+
+                if (sf::IntRect(maxs.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[1].setTexture(okt);
+                    oksprite[1].setPosition(830, 210);
+                    Game::speed = 1;
+                }
+            }
         }
 
         window.clear(sf::Color(82, 82, 82, 255));
+        for (int i = 0; i < 7; i++)
+            window.draw(colorb[i]);
+        window.draw(mins);
+        window.draw(mids);
+        window.draw(maxs);
+        for (int i = 0; i < 2; i++)
+            window.draw(oksprite[i]);
         window.draw(options_bckg);
         window.draw(backb);
         window.display();

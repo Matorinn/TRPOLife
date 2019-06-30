@@ -1,23 +1,16 @@
 #include "game.hpp"
-#include "painter.hpp"
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include "field.hpp"
 #include <cstdlib>
 
 Field field_;
-
-unsigned char lastKey = 0;
+int Game::speed;
+char lastKey = 0;
 
 Game::Game()
 {
 }
 
-void Game::drawRand(Painter& p)
-{
-    field_.draw(p);
-}
-
-static void keyboard(unsigned char key, int x, int y)
+void Game::keyboard(unsigned char key, int x, int y)
 {
     if (key == 27)
         exit(0);
@@ -34,8 +27,19 @@ void Game::display()
 
 void Game::timer(int)
 {
+    bool isPlay = true;
+    if (lastKey == '1')
+        isPlay = true;
+    if (lastKey == '2')
+        isPlay = false;
+    if (lastKey == '3')
+        field_.clearField();
+    // clear
+    if (isPlay)
+        field_.genChange();
+
     display();
-    glutTimerFunc(10, timer, 0);
+    glutTimerFunc(speed, timer, 0);
 }
 
 int Game::gamedraw(int argc, char** argv)
@@ -60,6 +64,11 @@ int Game::gamedraw(int argc, char** argv)
     timer(0);
 
     glutKeyboardFunc(keyboard);
+
+    glutMouseFunc(field_.mouse);
+    glutMotionFunc(field_.motion);
+    glutPassiveMotionFunc(field_.motionpass);
+
     glClearColor(0, 0, 0, 0);
     glutMainLoop();
 
