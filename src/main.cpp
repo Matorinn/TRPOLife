@@ -6,7 +6,7 @@
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
     sf::Texture obg, clb, okt, mint, midt, maxt;
-    sf::Sprite options_bckg, colorb[10], oksprite[2], mins, mids, maxs;
+    sf::Sprite options_bckg, colorb[7], oksprite[2], mins, mids, maxs;
     obg.loadFromFile("textures/options_bckg.png");
     okt.loadFromFile("textures/ok.png");
     mint.loadFromFile("textures/min.png");
@@ -21,7 +21,7 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
     maxs.setPosition(830, 210);
     clb.loadFromFile("textures/color.png");
     backb.setPosition(940, 540);
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; i++) {
         colorb[i].setTexture(clb);
     }
     colorb[0].setColor(sf::Color(255, 0, 0));
@@ -31,9 +31,10 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
     colorb[4].setColor(sf::Color(0, 255, 0));
     colorb[5].setColor(sf::Color(127, 127, 0));
     colorb[6].setColor(sf::Color(0, 255, 255));
-    colorb[7].setColor(sf::Color(0, 0, 0));
     for (int i = 0; i < 4; i++) {
         colorb[i].setPosition(630 + i * 60, 310);
+    }
+    for (int i = 0; i < 3; i++) {
         colorb[i + 4].setPosition(630 + i * 60, 370);
     }
     while (window.isOpen()) {
@@ -57,14 +58,12 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(690, 310);
                     Painter::active = "white";
-
                 }
                 if (sf::IntRect(colorb[2].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(750, 310);
                     Painter::active = "magenta";
-
                 }
                 if (sf::IntRect(colorb[3].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
@@ -90,12 +89,6 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
                     oksprite[0].setPosition(750, 370);
                     Painter::active = "cyan";
                 }
-                if (sf::IntRect(colorb[7].getGlobalBounds())
-                            .contains(sf::Mouse::getPosition(window))) {
-                    oksprite[0].setTexture(okt);
-                    oksprite[0].setPosition(810, 370);
-                    Painter::active = "black";
-                }
 
                 if (sf::IntRect(mins.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
@@ -118,7 +111,7 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
         }
 
         window.clear(sf::Color(82, 82, 82, 255));
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 7; i++)
             window.draw(colorb[i]);
         window.draw(mins);
         window.draw(mids);
