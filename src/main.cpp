@@ -6,7 +6,7 @@
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
     sf::Texture obg, clb, okt, mint, midt, maxt;
-    sf::Sprite options_bckg, colorb[10], oksprite, mins, mids, maxs;
+    sf::Sprite options_bckg, colorb[10], oksprite[2], mins, mids, maxs;
     obg.loadFromFile("textures/options_bckg.png");
     okt.loadFromFile("textures/ok.png");
     mint.loadFromFile("textures/min.png");
@@ -48,43 +48,61 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
                     return;
                 if (sf::IntRect(colorb[0].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(630, 310);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(630, 310);
                 }
                 if (sf::IntRect(colorb[1].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(690, 310);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(690, 310);
                 }
                 if (sf::IntRect(colorb[2].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(750, 310);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(750, 310);
                 }
                 if (sf::IntRect(colorb[3].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(810, 310);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(810, 310);
                 }
                 if (sf::IntRect(colorb[4].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(630, 370);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(630, 370);
                 }
                 if (sf::IntRect(colorb[5].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(690, 370);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(690, 370);
                 }
                 if (sf::IntRect(colorb[6].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(750, 370);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(750, 370);
                 }
                 if (sf::IntRect(colorb[7].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
-                    oksprite.setTexture(okt);
-                    oksprite.setPosition(810, 370);
+                    oksprite[0].setTexture(okt);
+                    oksprite[0].setPosition(810, 370);
+                }
+
+                if (sf::IntRect(mins.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[1].setTexture(okt);
+                    oksprite[1].setPosition(690, 210);
+                }
+
+                if (sf::IntRect(mids.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[1].setTexture(okt);
+                    oksprite[1].setPosition(760, 210);
+                }
+
+                if (sf::IntRect(maxs.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    oksprite[1].setTexture(okt);
+                    oksprite[1].setPosition(830, 210);
                 }
             }
         }
@@ -95,7 +113,8 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
         window.draw(mins);
         window.draw(mids);
         window.draw(maxs);
-        window.draw(oksprite);
+        for (int i = 0; i < 2; i++)
+            window.draw(oksprite[i]);
         window.draw(options_bckg);
         window.draw(backb);
         window.display();
