@@ -3,6 +3,32 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+void pressrules(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
+{
+    sf::Texture rbg;
+    sf::Sprite rules_bckg;
+    rbg.loadFromFile("textures/rules_bckg.png");
+    rules_bckg.setTexture(rbg);
+    backb.setPosition(940, 540);
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            if (event.type == sf::Event::MouseButtonReleased
+                && event.mouseButton.button == sf::Mouse::Left)
+                if (sf::IntRect(backb.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window)))
+                    return;
+        }
+
+        window.clear(sf::Color(82, 82, 82, 255));
+        window.draw(rules_bckg);
+        window.draw(backb);
+        window.display();
+    }
+}
+
 int main(int argc, char* argv[])
 {
     Game game;
@@ -36,6 +62,7 @@ int main(int argc, char* argv[])
                 }
                 if (sf::IntRect(rulesb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
+                    pressrules(window, event, backb);
                 }
                 if (sf::IntRect(optionsb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
