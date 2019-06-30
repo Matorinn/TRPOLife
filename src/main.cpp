@@ -50,41 +50,51 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(630, 310);
+                    Painter::active = "red";
                 }
                 if (sf::IntRect(colorb[1].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(690, 310);
+                    Painter::active = "white";
+
                 }
                 if (sf::IntRect(colorb[2].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(750, 310);
+                    Painter::active = "magenta";
+
                 }
                 if (sf::IntRect(colorb[3].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(810, 310);
+                    Painter::active = "dark_blue";
                 }
                 if (sf::IntRect(colorb[4].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(630, 370);
+                    Painter::active = "green";
                 }
                 if (sf::IntRect(colorb[5].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(690, 370);
+                    Painter::active = "brown";
                 }
                 if (sf::IntRect(colorb[6].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(750, 370);
+                    Painter::active = "cyan";
                 }
                 if (sf::IntRect(colorb[7].getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[0].setTexture(okt);
                     oksprite[0].setPosition(810, 370);
+                    Painter::active = "black";
                 }
 
                 if (sf::IntRect(mins.getGlobalBounds())
