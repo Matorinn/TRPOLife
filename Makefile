@@ -18,16 +18,16 @@ $(EXE): $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
 	$(CC) $^ -L lib/ -lglut -lGL -lsfml-system -lsfml-window -lsfml-graphics -lGLdispatch -lGLX -o $(EXE)
 
 $(OBJ1): $(SOURCE1)
-	$(CC) $(CFLAGS) $^ -I include -o $@
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
 
 $(OBJ2): $(SOURCE2)
-	$(CC) $(CFLAGS) $^ -I include -o $@
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
 
 $(OBJ3): $(SOURCE3)
-	$(CC) $(CFLAGS) $^ -I include -o $@
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
 
 $(OBJ4): $(SOURCE4)
-	$(CC) $(CFLAGS) $^ -I include -o $@
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
 
 $(LIBDIR):
 		mkdir $@ -p
