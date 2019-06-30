@@ -34,6 +34,16 @@ int main(int argc, char* argv[])
                             .contains(sf::Mouse::getPosition(window))) {
                     game.gamedraw(argc, argv);
                 }
+                if (sf::IntRect(rulesb.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                }
+                if (sf::IntRect(optionsb.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                }
+                if (sf::IntRect(exitb.getGlobalBounds())
+                            .contains(sf::Mouse::getPosition(window))) {
+                    window.close();
+                }
             }
         }
 
@@ -42,6 +52,12 @@ int main(int argc, char* argv[])
         title.setPosition(300, 0);
         window.draw(playb);
         playb.setPosition(300, 125);
+        window.draw(rulesb);
+        rulesb.setPosition(300, 225);
+        window.draw(optionsb);
+        optionsb.setPosition(300, 325);
+        window.draw(exitb);
+        exitb.setPosition(300, 425);
         window.display();
     }
 }
