@@ -15,7 +15,7 @@ EXE=bin/main
 all: $(LIBDIR) $(EXE)
 
 $(EXE): $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
-	$(CC) $^ -L lib/ -lglut -lGL -lsfml-system -lsfml-window -lsfml-graphics -o $(EXE)
+	$(CC) $^ -L lib/ -lglut -lGL -lsfml-system -lsfml-window -lsfml-graphics -lGLdispatch -lGLX -o $(EXE)
 
 $(OBJ1): $(SOURCE1)
 	$(CC) $(CFLAGS) $^ -I include -o $@
