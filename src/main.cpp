@@ -1,5 +1,5 @@
+#include "SFML/Graphics.hpp"
 #include "game.hpp"
-#include <SFML/Graphics.hpp>
 
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
@@ -10,15 +10,11 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
     mint.loadFromFile("textures/min.png");
     midt.loadFromFile("textures/mid.png");
     maxt.loadFromFile("textures/max.png");
+    clb.loadFromFile("textures/color.png");
     options_bckg.setTexture(obg);
     mins.setTexture(mint);
     mids.setTexture(midt);
     maxs.setTexture(maxt);
-    mins.setPosition(690, 210);
-    mids.setPosition(760, 210);
-    maxs.setPosition(830, 210);
-    clb.loadFromFile("textures/color.png");
-    backb.setPosition(940, 540);
     for (int i = 0; i < 7; i++) {
         colorb[i].setTexture(clb);
     }
@@ -35,6 +31,10 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
     for (int i = 0; i < 3; i++) {
         colorb[i + 4].setPosition(630 + i * 60, 370);
     }
+    mins.setPosition(690, 210);
+    mids.setPosition(760, 210);
+    maxs.setPosition(830, 210);
+    backb.setPosition(940, 540);
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -194,20 +194,23 @@ int main(int argc, char* argv[])
 {
     sf::RenderWindow window(sf::VideoMode(1000, 600), "MainMenu");
     sf::Texture pb, rb, ob, xb, bb, ttle;
+    sf::Sprite playb, rulesb, optionsb, exitb, backb, title;
     ttle.loadFromFile("textures/title.png");
     pb.loadFromFile("textures/play.png");
     rb.loadFromFile("textures/rules.png");
     ob.loadFromFile("textures/options.png");
     xb.loadFromFile("textures/exit.png");
     bb.loadFromFile("textures/back.png");
-    sf::Sprite playb, rulesb, optionsb, exitb, backb, title;
     playb.setTexture(pb);
     rulesb.setTexture(rb);
     optionsb.setTexture(ob);
     exitb.setTexture(xb);
     backb.setTexture(bb);
     title.setTexture(ttle);
-
+    title.setPosition(300, 0);
+    rulesb.setPosition(300, 225);
+    optionsb.setPosition(300, 325);
+    exitb.setPosition(300, 425);
     sf::Event event;
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
@@ -237,15 +240,11 @@ int main(int argc, char* argv[])
 
         window.clear(sf::Color(82, 82, 82, 255));
         window.draw(title);
-        title.setPosition(300, 0);
         window.draw(playb);
         playb.setPosition(300, 125);
         window.draw(rulesb);
-        rulesb.setPosition(300, 225);
         window.draw(optionsb);
-        optionsb.setPosition(300, 325);
         window.draw(exitb);
-        exitb.setPosition(300, 425);
         window.display();
     }
 }

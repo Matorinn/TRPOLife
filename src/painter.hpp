@@ -1,6 +1,7 @@
 #pragma once
-#include "map"
-#include "string"
+#include <iostream>
+#include <map>
+#include <string.h>
 
 class Painter {
 public:

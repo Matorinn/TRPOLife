@@ -1,5 +1,5 @@
 #include "painter.hpp"
-#include <GL/gl.h>
+#include "GL/gl.h"
 
 std::string Painter::active;
 

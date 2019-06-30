@@ -1,7 +1,7 @@
 #pragma once
+#include "GL/gl.h"
+#include "GL/glut.h"
 #include "painter.hpp"
-#include <GL/gl.h>
-#include <GL/glut.h>
 
 class Field {
 public:
