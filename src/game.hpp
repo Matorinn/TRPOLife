@@ -1,5 +1,7 @@
 #pragma once
 #include "field.hpp"
+#include <GL/gl.h>
+#include <GL/glut.h>
 
 class Painter;
 
@@ -7,7 +9,11 @@ class Game {
 public:
     Game();
     void drawRand(Painter& p);
+    int gamedraw(int argc, char** argv);
+    // void keyboard(unsigned char key, int x, int y);
 
 private:
-    Field field_;
+    // static Field field_;
+    static void display();
+    static void timer(int);
 };
