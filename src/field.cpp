@@ -1,7 +1,11 @@
 #include "field.hpp"
+#include "GL/glut.h"
 #include "painter.hpp"
 #include <cstdlib>
 #include <ctime>
+
+int m_x, m_y; // mouse x y
+bool m_down = false;
 
 Field::Field()
 {
@@ -17,12 +21,32 @@ void Field::draw(Painter& p)
 {
     for (int i = 0; i < HEIGHT; i++)
         for (int j = 0; j < WIDTH; j++)
-            if (map[i][j].life)
+            if (map[j][i].life)
                 p.rect(j * SIZE + 1,
                        i * SIZE + 1,
                        (j + 1) * SIZE - 1,
                        (i + 1) * SIZE - 1);
-    genChange();
+
+    if (m_down && m_x > 0 && m_y > 0 && m_x < WIDTH * SIZE
+        && m_y < HEIGHT * SIZE)
+        map[int(m_x / SIZE)][int(m_y / SIZE)].life = 1;
+    else {
+        int x = m_x / SIZE;
+        int y = m_y / SIZE;
+        p.rect(SIZE * x + 1,
+               y * SIZE + 1,
+               (x + 1) * SIZE - 1,
+               (y + 1) * SIZE - 1);
+    }
+}
+
+void Field::clearField()
+{
+    for (int y = 0; y < HEIGHT; ++y)
+        for (int x = 0; x < WIDTH; ++x) {
+            map[x][y].succ = 0;
+            map[x][y].life = 0;
+        }
 }
 
 void Field::genChange()
@@ -80,4 +104,21 @@ void Field::genChange()
     for (int y = 0; y < HEIGHT; y++)
         for (int x = 0; x < WIDTH; x++)
             map[x][y].life = map[x][y].succ;
+}
+
+void Field::motion(int ax, int ay)
+{
+    m_x = ax;
+    m_y = ay;
+}
+void Field::motionpass(int ax, int ay)
+{
+    m_x = ax;
+    m_y = ay;
+}
+void Field::mouse(int button, int state, int ax, int ay)
+{
+    m_y = ay;
+    m_x = ax;
+    m_down = state == GLUT_DOWN;
 }
