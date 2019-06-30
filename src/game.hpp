@@ -8,6 +8,7 @@ class Painter;
 class Game {
 public:
     Game();
+    static int speed;
     void drawRand(Painter& p);
     int gamedraw(int argc, char** argv);
     // void keyboard(unsigned char key, int x, int y);

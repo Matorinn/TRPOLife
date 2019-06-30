@@ -94,18 +94,21 @@ void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[1].setTexture(okt);
                     oksprite[1].setPosition(690, 210);
+                    Game::speed = 100;
                 }
 
                 if (sf::IntRect(mids.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[1].setTexture(okt);
                     oksprite[1].setPosition(760, 210);
+                    Game::speed = 10;
                 }
 
                 if (sf::IntRect(maxs.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window))) {
                     oksprite[1].setTexture(okt);
                     oksprite[1].setPosition(830, 210);
+                    Game::speed = 1;
                 }
             }
         }

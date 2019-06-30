@@ -6,6 +6,7 @@
 
 Field field_;
 bool isPlay = true;
+int Game::speed;
 
 unsigned char lastKey = 0;
 
@@ -41,7 +42,7 @@ void Game::timer(int)
         field_.genChange();
 
     display();
-    glutTimerFunc(10, timer, 0);
+    glutTimerFunc(speed, timer, 0);
 }
 
 int Game::gamedraw(int argc, char** argv)
