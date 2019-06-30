@@ -5,24 +5,43 @@
 
 void pressoptions(sf::RenderWindow& window, sf::Event& event, sf::Sprite& backb)
 {
-    sf::Texture obg;
-    sf::Sprite options_bckg;
+    sf::Texture obg, clb;
+    sf::Sprite options_bckg, colorb[10];
     obg.loadFromFile("textures/options_bckg.png");
     options_bckg.setTexture(obg);
+    clb.loadFromFile("textures/color.png");
     backb.setPosition(940, 540);
+    for (int i = 0; i < 8; i++) {
+        colorb[i].setTexture(clb);
+    }
+    colorb[0].setColor(sf::Color(255, 0, 0));
+    colorb[1].setColor(sf::Color(255, 255, 255));
+    colorb[2].setColor(sf::Color(255, 0, 255));
+    colorb[3].setColor(sf::Color(0, 0, 127));
+    colorb[4].setColor(sf::Color(0, 255, 0));
+    colorb[5].setColor(sf::Color(127, 127, 0));
+    colorb[6].setColor(sf::Color(0, 255, 255));
+    colorb[7].setColor(sf::Color(0, 0, 0));
+    for (int i = 0; i < 4; i++) {
+        colorb[i].setPosition(630 + i * 60, 310);
+        colorb[i + 4].setPosition(630 + i * 60, 370);
+    }
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
 
             if (event.type == sf::Event::MouseButtonReleased
-                && event.mouseButton.button == sf::Mouse::Left)
+                && event.mouseButton.button == sf::Mouse::Left) {
                 if (sf::IntRect(backb.getGlobalBounds())
                             .contains(sf::Mouse::getPosition(window)))
                     return;
+            }
         }
 
         window.clear(sf::Color(82, 82, 82, 255));
+        for (int i = 0; i < 8; i++)
+            window.draw(colorb[i]);
         window.draw(options_bckg);
         window.draw(backb);
         window.display();
