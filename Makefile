@@ -1,23 +1,39 @@
 CC=g++
-SOURCE=src/main.cpp
 CFLAGS=-c -Wall
-OBJ=build/main.o
+LIB=export LD_LIBRARY_PATH=lib/
+SOURCE1=src/main.cpp
+SOURCE2=src/game.cpp
+SOURCE3=src/painter.cpp
+SOURCE4=src/field.cpp
+OBJ1=build/main.o
+OBJ2=build/game.o
+OBJ3=build/painter.o
+OBJ4=build/field.o
 LIBDIR=bin build
 EXE=bin/main
 
 all: $(LIBDIR) $(EXE)
 
-$(EXE): $(OBJ)
-	$(CC) $(OBJ) -L OpenGL/lib/ -lglut -lGL -o $(EXE)
+$(EXE): $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4)
+	$(CC) $^ -L lib/ -lglut -lGL -lsfml-system -lsfml-window -lsfml-graphics -lGLdispatch -lGLX -o $(EXE)
 
-$(OBJ): $(SOURCE)
-	$(CC) $(CFLAGS) $^ -I OpenGL/include -o $@
+$(OBJ1): $(SOURCE1)
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
+
+$(OBJ2): $(SOURCE2)
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
+
+$(OBJ3): $(SOURCE3)
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
+
+$(OBJ4): $(SOURCE4)
+	$(CC) $(CFLAGS) $^ -I include -std=c++11 -o $@
 
 $(LIBDIR):
-	mkdir $@ -p
+		mkdir $@ -p
 
-launch:
-	./bin/main
+launch: all
+	$(LIB) && ./bin/main
 
 clean:
 	rm -rf build/*.o
